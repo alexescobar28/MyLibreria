@@ -13,8 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.2  # Instala Visual Studio Build Tools
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'  # Asegúrate de usar la versión de .NET que estás utilizando
 
     - name: Restore dependencies
       run: nuget restore MiLibreria.sln
@@ -23,4 +25,4 @@ jobs:
       run: msbuild MiLibreria.sln /p:Configuration=Release
 
     - name: Run tests
-      run: vstest.console.exe TestProject\bin\Debug\net8.0\MiLibreria.Tests.dll
+      run: dotnet test TestProject/TestProject.csproj --configuration Release
