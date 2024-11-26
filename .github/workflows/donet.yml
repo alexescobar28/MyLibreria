@@ -23,4 +23,4 @@ jobs:
       run: msbuild MiLibreria.sln /p:Configuration=Release
 
     - name: Run tests
-      run: vstest.console.exe TestProject\bin\Release\TestProject.dll
+      run: vstest.console.exe TestProject\bin\Debug\net8.0\MiLibreria.Tests.dll
