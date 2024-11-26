@@ -13,6 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2  # Instala Visual Studio Build Tools
+
     - name: Restore dependencies
       run: nuget restore MiLibreria.sln
 
@@ -21,4 +24,3 @@ jobs:
 
     - name: Run tests
       run: vstest.console.exe TestProject\bin\Release\TestProject.dll
-
