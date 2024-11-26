@@ -13,10 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2  # Instala las herramientas necesarias para usar msbuild
+
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'  # Asegúrate de usar la versión de .NET que estás utilizando
+        dotnet-version: '8.0.x'  # Asegúrate de usar la versión correcta de .NET
 
     - name: Restore dependencies
       run: nuget restore MiLibreria.sln
