@@ -11,10 +11,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
+    - uses: actions/checkout@v2  # Descarga el código fuente del repositorio
+
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.2  # Instala las herramientas necesarias para usar msbuild
+      uses: microsoft/setup-msbuild@v1.0.2  # Instala las herramientas necesarias para usar MSBuild
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
@@ -22,13 +22,16 @@ jobs:
         dotnet-version: '8.0.x'  # Asegúrate de usar la versión correcta de .NET
 
     - name: Restore dependencies
-      run: nuget restore MiLibreria.sln
+      run: nuget restore MiLibreria.sln  # Restaura las dependencias del proyecto
 
     - name: Build the project
-      run: msbuild MiLibreria.sln /p:Configuration=Release
+      run: msbuild MiLibreria.sln /p:Configuration=Release  # Construye el proyecto en configuración Release
 
     - name: Run tests
-      run: dotnet test MiLibreria.Tests\MiLibreria.Tests.csproj --configuration Release
-    - name: Create deployment package
-      run:  mkdir deploy msbuild MiLibreria.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfilezip -r deploy/package.zip deploy/
+      run: dotnet test MiLibreria.Tests\MiLibreria.Tests.csproj --configuration Release  # Ejecuta las pruebas
 
+    - name: Create deployment package
+      run: |
+        mkdir deploy  # Crea la carpeta donde se almacenará el paquete
+        msbuild MiLibreria.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile  # Compila el proyecto para despliegue
+        zip -r deploy/package.zip deploy/  # Comprime la carpeta 'deploy' en un archivo .zip
