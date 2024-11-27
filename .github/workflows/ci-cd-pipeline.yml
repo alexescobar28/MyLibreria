@@ -29,3 +29,6 @@ jobs:
 
     - name: Run tests
       run: dotnet test MiLibreria.Tests\MiLibreria.Tests.csproj --configuration Release
+    - name: Create deployment package
+      run:  mkdir deploy msbuild MiLibreria.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfilezip -r deploy/package.zip deploy/
+
