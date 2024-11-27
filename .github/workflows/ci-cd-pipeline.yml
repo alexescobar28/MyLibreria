@@ -34,4 +34,5 @@ jobs:
       run: |
         mkdir deploy  # Crea la carpeta donde se almacenará el paquete
         msbuild MiLibreria.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile  # Compila el proyecto para despliegue
-        zip -r deploy/package.zip deploy/  # Comprime la carpeta 'deploy' en un archivo .zip
+        Compress-Archive -Path deploy -DestinationPath deploy/package.zip  # Comprime la carpeta 'deploy' en un archivo .zip
+
